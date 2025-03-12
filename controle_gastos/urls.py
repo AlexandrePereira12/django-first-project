@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path
 
 from contas.views import home
+from contas.views import listagem
 
 urlpatterns = [
-    path('admin1/', admin.site.urls),
-    path('home', home)
+    path('admin/', admin.site.urls),
+    path('home', home),
+    path('', listagem)
 ]

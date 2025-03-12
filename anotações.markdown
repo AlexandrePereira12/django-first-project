@@ -10,8 +10,7 @@
 
 - python manage.py migrate
 - python manage.py makemigrations
-
-
+- 
 
 - venv\Scripts\activate
 - Dentro da app a pasta "templates"
