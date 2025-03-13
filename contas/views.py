@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import datetime
 from .models import Transacao
+from .forms import TransacaoForm
 
 
 def home(request):
@@ -20,3 +21,31 @@ def listagem(request):
 
     return render(request, 'contas/listagem.html', data)
 
+def novaTransacao(request):
+    data = {}
+    form = TransacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('listagem')
+
+    data['form'] = form
+
+    return render(request, 'contas/form.html', data)
+
+def update(request, pk):
+    data = {}
+    transacao = Transacao.objects.get(pk=pk)
+    form = TransacaoForm(request.POST or None,instance=transacao)
+    if form.is_valid():
+        form.save()
+        return redirect('listagem')
+
+    data['form'] = form
+    data['transacao'] = transacao
+
+    return render(request, 'contas/form.html', data)
+
+def delete(request, pk):
+    transacao = Transacao.objects.get(pk=pk)
+    transacao.delete()
+    return redirect('listagem')

@@ -9,8 +9,9 @@
 <h2>Olá</h2>
 <ul>
     {% for transacao in transacoes %}
-    <li>{{ transacao.descricao }} - {{ transacao.data }} - R${{ transacao.valor }} - {{transacao.categoria }}</li>
+    <li><a href="{% url 'update' transacao.id %}">{{ transacao.descricao }} - {{ transacao.data }} - R${{ transacao.valor }} - {{transacao.categoria }}</a></li>
     {% endfor %}
+    <button type="submit"><a href="{% url 'nova' %}">Nova Transação</a></button>
 </ul>
 </body>
 </html>
